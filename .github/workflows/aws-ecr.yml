@@ -49,12 +49,5 @@ jobs:
         chmod +x kubectl
         sudo mv kubectl /usr/local/bin/
         mkdir ~/.kube
-        echo ${{ secrets.KUBECONFIG }} | base64 --decode > ~/.kube/config
-
-    - name: Kubernetes Deployment
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: ${{ secrets.REPO_NAME }}
-        IMAGE_TAG: ${{ github.sha }}
-      run: |
-        kubectl set image deploy/node-web-deployment node-web=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --record
+        echo ${{ secrets.KUBECONFIG }} > ~/.kube/config
+        ls -lrt ~/.kube
