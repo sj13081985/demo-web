@@ -27,4 +27,5 @@ jobs:
         chmod +x kubectl
         sudo mv kubectl /usr/local/bin/
         mkdir ~/.kube
-        'echo "$KUBECONFIG" > ~/.kube/config'
+        touch ~/.kube/config
+        echo "$KUBECONFIG" > ~/.kube/config
