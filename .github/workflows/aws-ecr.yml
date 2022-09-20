@@ -16,6 +16,8 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Install and configure kubectl
+      env:
+        KUBECONFIG: ${{secrets.KUBECONFIG}}
       run: |
         VERSION=$(curl --silent https://storage.googleapis.com/kubernetes-release/release/stable.txt)
         curl https://storage.googleapis.com/kubernetes-release/release/$VERSION/bin/linux/amd64/kubectl \
@@ -25,4 +27,4 @@ jobs:
         chmod +x kubectl
         sudo mv kubectl /usr/local/bin/
         mkdir ~/.kube
-        echo ${{ secrets.KUBECONFIG }} > ~/.kube/config
+        'echo "$KUBECONFIG" > ~/.kube/config'
